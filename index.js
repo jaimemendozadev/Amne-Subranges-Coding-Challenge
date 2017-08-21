@@ -89,7 +89,9 @@ var TrackingTrends = (N, K) => {
     }
   }
     
-  console.log(`trends.windowIncreases are ${trends.windowIncreases}`)
+  for (var idx in trends.windowIncreases)
+    console.log(trends.windowIncreases[idx]);
+
   return trends.windowIncreases;
     
     

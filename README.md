@@ -70,7 +70,7 @@ Clone the project repo from GitHub locally to your computer.
 
 Open your terminal and make your way to the root directory of the repo.
 
-From the root directory of the project, run `$ npm run start` in your terminal. You should see a `console.log` of the results.
+From the root directory of the project, run `$ npm run start` in your terminal. You should see a `console.log` of each difference on a separate line.
 
 Our `TrackingTrends` function takes an `N` paramater that represents the input (the data to analyze in an array format) and a `K` paramater that represents the window size. These paramaters can be changed in our `input.js` file by changing the `N` and `window` variables respectively.
 
