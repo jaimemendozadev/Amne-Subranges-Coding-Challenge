@@ -38,8 +38,11 @@ var TrackingTrends = (N, K) => {
     numbers to each other in the current window. 
     For any K size window, you can only make K - 1 comparisons.
     */
+    
 
     if (trends.counter === K - 1) {
+
+
       /*
       trends.windowStart + K means we're currently 
       processing the last possible window set because the
@@ -47,12 +50,12 @@ var TrackingTrends = (N, K) => {
       equals the length of the N data array
       */
 
-
       if (trends.windowStart + K === N.length) {
         /*
         inside here, we're at the last comparison 
-        of the last window of our N data array
-        make the last comparison and then break the loop
+        of the last window of our N data array.
+        make the last comparison, the last calculation, 
+        and then break the loop
         */
         if (trends.stillIncreasing) {
           trends.increase++;
