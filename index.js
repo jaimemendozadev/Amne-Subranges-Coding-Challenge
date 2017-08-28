@@ -1,27 +1,10 @@
-var input = require('./input.js');
+var fs = require('fs');
+var importedFile = process.argv[2];
 var helpers = require('./helpers.js');
 
 
 var TrackingTrends = (N, K) => {
-  /*
-  we first check to make sure the window size is greater than 1,
-  that we have enough data to make a comparison, and that N 
-  is an array.
-  */
-
-  if (!Array.isArray(N)){
-    return 'Your N input is formatted incorrectly, please use array formatting.'
-  }
-  if (K < 2) {
-    return 'Your window size needs to be greater than > 1';
-  }
-
-  if (N.length < 1 || K > N.length) {
-    return 'You have insufficient data to make a comparison';
-  }
   
- 
-
   var trends = {
     counter: 0,
     increase: 0,
@@ -101,6 +84,51 @@ var TrackingTrends = (N, K) => {
     
 }
 
-TrackingTrends(input.N, input.K);
+
+/*
+perform async read of file & 
+invoke TrackingTrends in callback
+*/
+fs.readFile(importedFile, (err, data) => {
+  if(err) throw err;
+  var dataArray = data.toString().split("\n");
+  
+  var N_Length = dataArray[0].split(" ")[0];
+  N_Length = parseInt(N_Length, 10);
+
+  var K_Window = dataArray[0].split(" ")[1];
+  K_Window = parseInt(K_Window, 10);
+
+  var N_Data = dataArray[1].split(" ");  
+  N_Data = N_Data.map(int => parseInt(int, 10));  
+
+
+  /*
+  we first check to make sure the window size is greater than 1,
+  that the expected N length of the data matches the actual data length,
+  and that we have enough data to make a comparison
+  */
+
+  if (K_Window < 2) {
+    throw new Error('Your window size needs to be greater than > 1');
+  }
+
+  if (N_Length !== N_Data.length){
+    console.log(`N_Length is ${N_Length} and N_Data.length is ${N_Data.length}`)
+    throw new Error('The expected size of the data doesn\'t match what you passed in. Please make sure you passed in all the data.');
+  }
+
+  if (N_Data.length < 1 || K_Window > N_Data.length) {
+    throw new Error('You have insufficient data to make a comparison');
+  }
+
+  TrackingTrends(N_Data, K_Window);
+  
+});
+
+
+
+
+
 
 
