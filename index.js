@@ -91,8 +91,19 @@ invoke TrackingTrends in callback
 */
 fs.readFile(importedFile, (err, data) => {
   if(err) throw err;
+
+  /*
+  data is converted to a string, then converted
+  to array by splitting the string at new line 
+  */
   var dataArray = data.toString().split("\n");
-  
+
+
+  //each string is trimmed to remove trailing white space
+  dataArray = dataArray.map(string => string.trim());
+
+
+  //extract the N_Length, K_Window, & N_Data and convert to numbers
   var N_Length = dataArray[0].split(" ")[0];
   N_Length = parseInt(N_Length, 10);
 
@@ -101,6 +112,7 @@ fs.readFile(importedFile, (err, data) => {
 
   var N_Data = dataArray[1].split(" ");  
   N_Data = N_Data.map(int => parseInt(int, 10));  
+
 
 
   /*
@@ -114,7 +126,6 @@ fs.readFile(importedFile, (err, data) => {
   }
 
   if (N_Length !== N_Data.length){
-    console.log(`N_Length is ${N_Length} and N_Data.length is ${N_Data.length}`)
     throw new Error('The expected size of the data doesn\'t match what you passed in. Please make sure you passed in all the data.');
   }
 

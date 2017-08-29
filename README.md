@@ -21,15 +21,23 @@ For this problem, you are given `N` days of average home sale price data, and a 
 
 # How It Works
 
-Our main function `TrackingTrends` is what determines the increasing or decreasing subranges for an `N` input. It relies on `checkIncrease` and `haveWindowIncrease` helper functions located in `helpers.js`.
+Using Node, we can import a `.txt` input file that has the following contents:
 
- Inside our `TrackingTrends` function, we have a `trends` object with key/value pairs that tracks a lot of things, including:
+ - Line 1: Two integers, `N` and `K`.
+ - Line 2: `N` positive integers of average home sale price, each less than `1,000,000`.
+
+We'll asynchronously extract the information from the `.txt` file and feed it into our main function `TrackingTrends`, which determines the increasing or decreasing subranges for an `N` input. 
+
+It relies on `checkIncrease` and `haveWindowIncrease` helper functions located in `helpers.js`.
+
+ Inside our `TrackingTrends` function, we have a `trends` object with key/value pairs that tracks many things, including:
+
    - a `counter` key that tracks the number of comparisons made in each window
-   - an `increase` key that tracks increasing subranges when two numbers are compared
-   - a `decrease` key tracks decreasing subranges when two numbers are compared
+   - an `increase` key that tracks increasing subranges between 2 numbers
+   - a `decrease` key tracks decreasing subranges between 2 numbers
    - a `windowStart` key tracks the index of the start of each window in the `N` input
    - a `stillIncreasing` key checks if each successive calculation in the current window continues reuslting in an increasing subrange
-   - a `windowIncreases` key with an `[]` array value that collects the difference between increasing & decreasing subranges for each window
+   - a `windowIncreases` key with an `[]` array value that collects the difference between increasing and decreasing subranges for each window
 
 
 
@@ -68,11 +76,19 @@ You'll need Node and NPM to run this program. Go to the [Node website](https://n
 
 Clone the project repo from GitHub locally to your computer.
 
+In the root of the project folder, you can dump a `.txt` input file that will be read by Node and its values passed to the main `TrackingTrends` function.
+
 Open your terminal and make your way to the root directory of the repo.
 
-From the root directory of the project, run `$ npm run start` in your terminal. You should see a `console.log` of each difference on a separate line.
+From the root directory of the project, type `$ node index.js nameOfYourInputFile.txt` in your terminal and press enter. 
 
-Our `TrackingTrends` function takes an `N` paramater that represents the input (the data to analyze in an array format) and a `K` paramater that represents the window size. These paramaters can be changed in our `input.js` file by changing the `N` and `window` variables respectively.
+The `.txt` file's contents will get extracted and the values passed into the `TrackingTrends` function. 
+
+When you type out the command in the terminal, make sure there is a space between `node`, `index.js`, and the `.txt` that you dumped into the project folder.
+
+In your terminal you should see a `console.log` of one integer for each window’s result, with each integer `console.log`ed on a separate line.
+
+
 
 
 # Created By
